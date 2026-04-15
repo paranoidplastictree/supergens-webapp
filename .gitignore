@@ -1,4 +1,5 @@
 /node_modules
+/dist
 supergen_data.json
 supergen_data.min.json
 !/public/supergen_data.json
