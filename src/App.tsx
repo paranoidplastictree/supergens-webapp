@@ -164,7 +164,7 @@ function App() {
             <div className="sort-controls">
               <label htmlFor="sort-select">Sort by:</label>
               <select id="sort-select" value={sortBy} onChange={e => setSortBy(e.target.value as SortOption)}>
-                <option value="score">Reddit Score</option>
+                <option value="score">Reddit Upvotes</option>
                 <option value="recent">Most Recent</option>
                 <option value="machines">Machine Count</option>
                 <option value="comments">Comment Count</option>
