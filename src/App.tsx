@@ -5,7 +5,7 @@ import FilterPanel from './components/FilterPanel';
 import SupergenCard from './components/SupergenCard';
 import './styles/App.css';
 
-type SortOption = 'score' | 'recent' | 'machines';
+type SortOption = 'score' | 'recent' | 'machines' | 'comments';
 
 function App() {
   const [data, setData] = useState<HarvestedData | null>(null);
@@ -54,6 +54,8 @@ function App() {
           return b.reddit_post.created_utc - a.reddit_post.created_utc;
         case 'machines':
           return b.machine_count - a.machine_count;
+        case 'comments':
+          return b.reddit_post.num_comments - a.reddit_post.num_comments;
         default:
           return 0;
       }
@@ -160,6 +162,7 @@ function App() {
                 <option value="score">Reddit Score</option>
                 <option value="recent">Most Recent</option>
                 <option value="machines">Machine Count</option>
+                <option value="comments">Comment Count</option>
               </select>
             </div>
           </div>
@@ -167,7 +170,7 @@ function App() {
           <div className="supergen-list">
             {filteredSupergens.map(supergen => (
               <SupergenCard
-                key={supergen.url}
+                key={supergen.reddit_post.id + '|' + supergen.url}
                 supergen={supergen}
                 noiseMachines={data!.noise_machines}
               />

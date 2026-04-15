@@ -26,6 +26,7 @@ export interface RedditPost {
 
 export interface Supergen {
   url: string;
+  title: string;
   noise_machines: SupergenNoiseMachine[];
   machine_count: number;
   reddit_post: RedditPost;

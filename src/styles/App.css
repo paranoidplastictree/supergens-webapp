@@ -216,32 +216,58 @@
 .supergen-card {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: box-shadow 0.2s;
+  overflow: hidden;
 }
 
 .supergen-card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .card-header {
-  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-header:hover {
+  background: #fafbfc;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.expand-toggle {
+  color: #95a5a6;
+  font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #2c3e50;
-  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.card-machines-preview {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin: 0.25rem 0 0.5rem 1.25rem;
   line-height: 1.4;
 }
 
 .card-meta {
   display: flex;
   gap: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #7f8c8d;
+  margin-left: 1.25rem;
 }
 
 .vote-count {
@@ -259,7 +285,7 @@
 
 .card-body {
   border-top: 1px solid #e0e6ed;
-  padding-top: 1rem;
+  padding: 1rem 1.5rem 1.5rem;
 }
 
 .post-info {
@@ -312,6 +338,15 @@
   font-weight: 500;
   color: #2c3e50;
   margin-right: 0.5rem;
+}
+
+.machine-name a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.machine-name a:hover {
+  text-decoration: underline;
 }
 
 .machine-desc {
