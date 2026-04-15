@@ -25,7 +25,7 @@
   --card-bg-hover:  #ede8dc;
   --card-body-bg:   #ede8dc;
   --card-text:      var(--dark-warm);
-  --card-text-sub:  var(--fog-brown);
+  --card-text-sub:  #4d3a24;
   --card-text-muted: #6b4e2e;
   --card-border:    var(--fog-gold);
   --card-surface:   var(--fog-light);
@@ -252,7 +252,7 @@ body::before {
 
 .search-input {
   width: 100%;
-  padding: 0.7rem 2.5rem 0.7rem 1rem;
+  padding: 0.7rem 3rem 0.7rem 1rem;
   background: var(--bg-elevated);
   border: 1px solid var(--fog-brown);
   border-radius: 8px;
@@ -269,7 +269,7 @@ body::before {
 
 .clear-button {
   position: absolute;
-  right: 0.75rem;
+  right: 0;
   background: none;
   border: none;
   color: var(--text-muted);
@@ -277,7 +277,11 @@ body::before {
   font-size: 1.1rem;
   line-height: 1;
   padding: 0;
-  padding: 0.2rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.2s;
 }
 
@@ -319,6 +323,7 @@ body::before {
   color: var(--text-muted);
   border: 1px solid var(--border-soft);
   padding: 0.3rem 0.7rem;
+  min-height: 44px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.75rem;
@@ -343,6 +348,7 @@ body::before {
   display: flex;
   align-items: center;
   padding: 0.6rem 0.5rem;
+  min-height: 44px;
   margin: 0.1rem 0;
   border-radius: 6px;
   cursor: pointer;
@@ -469,6 +475,7 @@ body::before {
 .card-header {
   width: 100%;
   padding: 1rem 1.25rem;
+  min-height: 44px;
   cursor: pointer;
   user-select: none;
   transition: background 0.2s;
@@ -526,6 +533,8 @@ body::before {
   color: var(--card-text);
   text-decoration: none;
   transition: color 0.2s;
+  display: inline-block;
+  padding: 0.35rem 0;
 }
 
 .card-title a:hover { color: var(--fog-brown); }
@@ -546,7 +555,7 @@ body::before {
 }
 
 .vote-count, .comment-count, .machine-count {
-  color: var(--fog-brown);
+  color: #4d3a24;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -594,7 +603,7 @@ body::before {
 
 .position {
   font-weight: 500;
-  color: var(--fog-gold);
+  color: #7a5e20;
   margin-right: 0.5rem;
   min-width: 1.5rem;
   font-size: 0.8rem;
@@ -672,7 +681,7 @@ body::before {
 
 .load-more button {
   padding: 0.65rem 2rem;
-  background: var(--fog-brown);
+  background: #4d3a24;
   color: var(--pale-fog);
   border: none;
   border-radius: 6px;
