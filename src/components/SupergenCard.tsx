@@ -29,7 +29,7 @@ const SupergenCard: React.FC<SupergenCardProps> = ({ supergen, noiseMachines }) 
         aria-label={`${expanded ? 'Collapse' : 'Expand'} ${supergen.title}`}
       >
         <div className="card-title-row">
-          <span className="expand-toggle" aria-hidden="true">{expanded ? '▾' : '▸'}</span>
+          <span className="expand-toggle" aria-hidden="true">{'▸'}</span>
           <h3 className="card-title">
             <a
               href={supergen.url}
@@ -44,9 +44,9 @@ const SupergenCard: React.FC<SupergenCardProps> = ({ supergen, noiseMachines }) 
         </div>
         <div className="card-machines-preview" aria-label="Noise machines">{machineTitles}</div>
         <div className="card-meta">
-          <span className="vote-count" aria-label={`${supergen.reddit_post.score} upvotes`}>⬆ {supergen.reddit_post.score}</span>
-          <span className="comment-count" aria-label={`${supergen.reddit_post.num_comments} comments`}>💬 {supergen.reddit_post.num_comments}</span>
-          <span className="machine-count" aria-label={`${supergen.machine_count} noise machines`}>🎵 {supergen.machine_count} machines</span>
+          <span className="vote-count" aria-label={`${supergen.reddit_post.score} upvotes`}><span aria-hidden="true">⬆</span>{supergen.reddit_post.score}</span>
+          <span className="comment-count" aria-label={`${supergen.reddit_post.num_comments} comments`}><span aria-hidden="true">💬</span>{supergen.reddit_post.num_comments}</span>
+          <span className="machine-count" aria-label={`${supergen.machine_count} noise machines`}><span aria-hidden="true">🎵</span>{supergen.machine_count} machines</span>
         </div>
       </button>
 
