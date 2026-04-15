@@ -1,7 +1,6 @@
 /* ─── Design Tokens ─── */
 :root {
   --black-deep:     #0a0a0a;
-  --black:          #121210;
   --dark-earth:     #1a1814;
   --dark-warm:      #2a2318;
   --fog-brown:      #6b5a3e;
@@ -9,23 +8,17 @@
   --fog-light:      #d4b87a;
   --mist:           #c8b89a;
   --pale-fog:       #e0d2b8;
-  --cream:          #ede6d8;
-  --cream-bright:   #f5f0e8;
   --accent:         #5bb7db;
-  --accent-glow:    #5bb7db22;
-  --accent-bright:  #7dcde8;
   --accent-muted:   #3a8aa8;
 
   /* Dark shell (header, sidebar, page bg) */
   --bg-primary:     var(--black-deep);
-  --bg-secondary:   var(--black);
   --bg-elevated:    var(--dark-earth);
   --bg-surface:     var(--dark-warm);
   --text-primary:   var(--pale-fog);
   --text-secondary: var(--mist);
   --text-muted:     #a8957a;
   --border-soft:    #ffffff22;
-  --border-accent:  var(--accent-muted);
 
   /* Card (light) */
   --card-bg:        var(--pale-fog);
@@ -753,7 +746,6 @@ body::before {
 
 @media (max-width: 640px) {
   .app-header { padding: 1.25rem 1.5rem; }
-  .app-header h1 { font-size: 1.3rem; }
   .stats { flex-direction: column; gap: 0.25rem; }
   .app-content { padding: 1rem 1.5rem; }
   .toolbar { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
