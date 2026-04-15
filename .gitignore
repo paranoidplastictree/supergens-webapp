@@ -1,4 +1,5 @@
 /node_modules
 supergen_data.json
 supergen_data.min.json
+!/public/supergen_data.json
 .DS_Store
