@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { HarvestedData, Supergen, NoiseMachine } from './types';
+import type { HarvestedData } from './types';
 import SearchBar from './components/SearchBar';
 import FilterPanel from './components/FilterPanel';
 import SupergenCard from './components/SupergenCard';
