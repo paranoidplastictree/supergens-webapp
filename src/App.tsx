@@ -3,17 +3,22 @@ import { HarvestedData, Supergen, NoiseMachine } from './types';
 import SearchBar from './components/SearchBar';
 import FilterPanel from './components/FilterPanel';
 import SupergenCard from './components/SupergenCard';
+import AboutPage from './components/AboutPage';
 import './styles/App.css';
 
 type SortOption = 'score' | 'recent' | 'machines' | 'comments';
+type Page = 'main' | 'about';
 
 function App() {
+  const [page, setPage] = useState<Page>('main');
   const [data, setData] = useState<HarvestedData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMachines, setSelectedMachines] = useState<Set<string>>(new Set());
   const [sortBy, setSortBy] = useState<SortOption>('score');
+  const [visibleCount, setVisibleCount] = useState(25);
+  const PAGE_SIZE = 25;
 
   useEffect(() => {
     // Load data from JSON file
@@ -75,8 +80,7 @@ function App() {
       const query = searchQuery.toLowerCase();
       return machines.filter(m =>
         m.title.toLowerCase().includes(query) ||
-        m.subtitle.toLowerCase().includes(query) ||
-        m.machine_id.toLowerCase().includes(query)
+        m.subtitle.toLowerCase().includes(query)
       );
     }
 
@@ -96,7 +100,11 @@ function App() {
   const handleClearFilters = () => {
     setSelectedMachines(new Set());
     setSearchQuery('');
+    setVisibleCount(PAGE_SIZE);
   };
+
+  // Reset pagination when filters/sort change
+  useEffect(() => { setVisibleCount(PAGE_SIZE); }, [selectedMachines, searchQuery, sortBy]);
 
   if (loading) {
     return (
@@ -121,44 +129,41 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>MyNoise Supergen Search</h1>
-        <div className="stats">
-          {data && (
-            <>
-              <span>{data.metadata.total_supergens} supergens</span>
-              <span>{data.metadata.total_machines} noise machines</span>
-              <span>Last updated: {new Date(data.metadata.harvested_at).toLocaleDateString()}</span>
-            </>
-          )}
+        <div className="header-left">
+          <button className="site-title" onClick={() => setPage('main')} aria-label="Go to home page">MyNoise Supergen Search</button>
+          <div className="stats">
+            {data && (
+              <>
+                <span>{data.metadata.total_supergens} supergens</span>
+                <span>{data.metadata.total_machines} noise machines</span>
+                <span>Last updated: {new Date(data.metadata.harvested_at).toLocaleDateString()}</span>
+              </>
+            )}
+          </div>
         </div>
+        <nav className="header-nav">
+          <button className={`nav-link ${page === 'main' ? 'active' : ''}`} onClick={() => setPage('main')}>Supergens</button>
+          <button className={`nav-link ${page === 'about' ? 'active' : ''}`} onClick={() => setPage('about')}>About</button>
+          <a className="nav-link nav-external" href="https://mynoise.net" target="_blank" rel="noopener noreferrer">MyNoise.net ↗</a>
+        </nav>
       </header>
 
-      <div className="app-content">
-        <aside className="sidebar">
+      {page === 'about' && <AboutPage />}
+      <div className="app-content" style={{ display: page === 'about' ? 'none' : undefined }}>
+        <div className="content-top">
           <SearchBar
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder="Search noise machines..."
           />
-
-          <FilterPanel
-            machines={availableMachines}
-            selectedMachines={selectedMachines}
-            onMachineToggle={handleMachineToggle}
-            onClearFilters={handleClearFilters}
-          />
-        </aside>
-
-        <main className="main-content">
           <div className="toolbar">
             <div className="results-count">
               {filteredSupergens.length} supergen{filteredSupergens.length !== 1 ? 's' : ''} found
               {selectedMachines.size > 0 && ` (filtering by ${selectedMachines.size} machine${selectedMachines.size !== 1 ? 's' : ''})`}
             </div>
-
             <div className="sort-controls">
-              <label>Sort by:</label>
-              <select value={sortBy} onChange={e => setSortBy(e.target.value as SortOption)}>
+              <label htmlFor="sort-select">Sort by:</label>
+              <select id="sort-select" value={sortBy} onChange={e => setSortBy(e.target.value as SortOption)}>
                 <option value="score">Reddit Score</option>
                 <option value="recent">Most Recent</option>
                 <option value="machines">Machine Count</option>
@@ -166,9 +171,21 @@ function App() {
               </select>
             </div>
           </div>
+        </div>
 
+        <div className="content-body">
+          <aside className="sidebar">
+            <FilterPanel
+              machines={availableMachines}
+              selectedMachines={selectedMachines}
+              onMachineToggle={handleMachineToggle}
+              onClearFilters={handleClearFilters}
+            />
+          </aside>
+
+          <main className="main-content">
           <div className="supergen-list">
-            {filteredSupergens.map(supergen => (
+            {filteredSupergens.slice(0, visibleCount).map(supergen => (
               <SupergenCard
                 key={supergen.reddit_post.id + '|' + supergen.url}
                 supergen={supergen}
@@ -177,13 +194,22 @@ function App() {
             ))}
           </div>
 
+          {visibleCount < filteredSupergens.length && (
+            <div className="load-more">
+              <button onClick={() => setVisibleCount(v => v + PAGE_SIZE)}>
+                Load more ({filteredSupergens.length - visibleCount} remaining)
+              </button>
+            </div>
+          )}
+
           {filteredSupergens.length === 0 && (
             <div className="no-results">
               <p>No supergens found matching your filters.</p>
               <button onClick={handleClearFilters}>Clear Filters</button>
             </div>
           )}
-        </main>
+          </main>
+        </div>
       </div>
     </div>
   );

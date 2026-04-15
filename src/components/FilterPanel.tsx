@@ -19,7 +19,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       <div className="filter-header">
         <h3>Filter by Noise Machine</h3>
         {selectedMachines.size > 0 && (
-          <button className="clear-filters-btn" onClick={onClearFilters}>
+          <button className="clear-filters-btn" onClick={onClearFilters} aria-label={`Clear ${selectedMachines.size} selected filter${selectedMachines.size !== 1 ? 's' : ''}`}>
             Clear ({selectedMachines.size})
           </button>
         )}

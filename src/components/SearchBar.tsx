@@ -9,8 +9,11 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, placeholder }) => {
   return (
     <div className="search-bar">
+      <label htmlFor="noise-machine-search" className="sr-only">Search noise machines</label>
       <input
+        id="noise-machine-search"
         type="text"
+        role="searchbox"
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
