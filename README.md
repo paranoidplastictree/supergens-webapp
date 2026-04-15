@@ -19,11 +19,11 @@ npm install
 2. Copy supergen data from harvester:
 ```bash
 # First run the harvester to get data
-cd ../mynoise-harvester
+cd ../supergens-harvester
 python harvester.py
 
 # Copy the data file to webapp public directory
-cp supergen_data.json ../mynoise-webapp/public/
+cp supergen_data.json ../supergens-webapp/public/
 ```
 
 3. Run development server:
